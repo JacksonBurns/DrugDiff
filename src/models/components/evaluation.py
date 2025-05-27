@@ -1,7 +1,7 @@
 import selfies as sf
 import pandas as pd
 from rdkit.Chem.Crippen import MolLogP
-from rdkit.Chem import MolFromSmiles, MolToSmiles, QED, Descriptors
+from rdkit.Chem import MolFromSmiles, MolToSmiles, QED, Descriptors, rdFingerprintGenerator
 from typing import Optional, List
 from tqdm import tqdm
 from src.utils.sascorer import calculateScore
@@ -17,6 +17,8 @@ FILE_PATH = "/".join(FILE_PATH.split("\\"))
 print(FILE_PATH)
 REPO_PATH = FILE_PATH.split('DrugDiff')[0] + 'DrugDiff'
 sys.path.append(REPO_PATH)
+
+_MORGAN_GENERATOR = rdFingerprintGenerator.GetMorganGenerator(radius=3,fpSize=2048)
 
 
 def one_hot_to_selfies(hot, dm):
@@ -184,8 +186,8 @@ class Evaluator():
     def tanimoto_calc(self, smi1, smi2):
         mol1 = Chem.MolFromSmiles(smi1)
         mol2 = Chem.MolFromSmiles(smi2)
-        fp1 = AllChem.GetMorganFingerprintAsBitVect(mol1, 3, nBits=2048)
-        fp2 = AllChem.GetMorganFingerprintAsBitVect(mol2, 3, nBits=2048)
+        fp1 = _MORGAN_GENERATOR.GetFingerprint(mol1)
+        fp2 = _MORGAN_GENERATOR.GetFingerprint(mol2)
         s = round(DataStructs.TanimotoSimilarity(fp1,fp2),3)
         return s
 
