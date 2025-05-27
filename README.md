@@ -6,6 +6,12 @@ Details about DrugDiff's architecture are illustrated below and further describe
 ![Figure 1](https://github.com/MarieOestreich/DrugDiff/blob/main/DrugDiff-Overview.jpg)
 __Figure 1: DrugDiff Oveview__
 
+## 0. Setup
+
+Create an 'output' directory.
+
+Install Python 3.12 then `pip install selfies pandas numpy lightning seaborn scipy matplotlib scikit-learn torch rdkit lets_plot`
+
 ## 1. Download Model Checkpoints
 
 Please download the DrugDiff checkpoint as well as the predictor checkpoints from here: [zenodo](https://doi.org/10.5281/zenodo.12755762)
