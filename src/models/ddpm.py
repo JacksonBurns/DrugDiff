@@ -72,13 +72,13 @@ class LatentDiffusion(pl.LightningModule):
         self.scale_losses_sampling = False
 
         # load symbol mappings and maximum molecule string length information from trained VAE
-        with open(FILE_PATH + '/../../checkpoints/vae/'+'symbol_to_idx.pickle', "rb") as input_file:
+        with open(FILE_PATH + '/../../data/zinc250k/'+'symbol_to_idx.pickle', "rb") as input_file:
             self.symbol_to_idx = pickle.load(input_file)
 
-        with open(FILE_PATH + '/../../checkpoints/vae/'+'idx_to_symbol.pickle', "rb") as input_file:
+        with open(FILE_PATH + '/../../data/zinc250k/'+'idx_to_symbol.pickle', "rb") as input_file:
             self.idx_to_symbol = pickle.load(input_file)
 
-        with open(FILE_PATH + '/../../checkpoints/vae/'+'dataset_max_len.pickle', "rb") as input_file:
+        with open(FILE_PATH + '/../../data/zinc250k/'+'dataset_max_len.pickle', "rb") as input_file:
 
             self.max_len = pickle.load(input_file)
    
